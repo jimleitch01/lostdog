@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - ./uploads:/app/uploads
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: lostdog
+      POSTGRES_USER: lostdoguser
+      POSTGRES_PASSWORD: lostdogpassword
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
